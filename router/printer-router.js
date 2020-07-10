@@ -87,7 +87,7 @@ router.post('/', (req, res) => {
       });
     }
 
-    return res.json({
+    return res.status(201).json({
       ok: true,
       impresora: data,
       message: 'Impresora agregada.',
@@ -98,15 +98,68 @@ router.post('/', (req, res) => {
 // ========================================
 //                 UPDATE A PRINTER
 // ========================================
-router.put('/', (req, res) => {
-  return res.json({
-    message: 'put',
+router.put('/:id', (req, res) => {
+  const id = req.params.id;
+  let body = req.body;
+
+  delete body.marca;
+  delete body.serie;
+  delete body.contador;
+
+  Printer.findOneAndUpdate({ _id: id }, body, { new: true }, (err, data) => {
+    if (err)
+      return res.status(500).json({
+        ok: false,
+        error: {
+          message: 'Peticion no valida.',
+        },
+      });
+
+    if (!data)
+      return res.status(404).json({
+        ok: false,
+        error: {
+          message: 'No existe la impresora.',
+        },
+      });
+
+    return res.json({
+      ok: true,
+      impresora: data,
+      message: 'Impresora actualizada.',
+    });
   });
 });
 
-router.delete('/', (req, res) => {
-  return res.json({
-    message: 'delete',
+// ========================================
+//             Delete a printer
+// ========================================
+
+router.delete('/:id', (req, res) => {
+  const id = req.params.id;
+
+  Printer.findOneAndDelete({ _id: id }, (err, deleted) => {
+    if (err)
+      return res.status(400).json({
+        ok: false,
+        error: {
+          message: 'Error en la peticion.',
+        },
+      });
+
+    if (!deleted)
+      return res.status(404).json({
+        ok: false,
+        error: {
+          message: 'No se encuentra impresora.',
+        },
+      });
+
+    return res.json({
+      ok: true,
+      impresora: deleted,
+      message: 'Impresora eliminada.',
+    });
   });
 });
 
