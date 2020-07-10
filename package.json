@@ -1,0 +1,29 @@
+{
+  "name": "tech-impresoras",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WilsonAG/tech-impresoras.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WilsonAG/tech-impresoras/issues"
+  },
+  "homepage": "https://github.com/WilsonAG/tech-impresoras#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.22"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.4"
+  }
+}
