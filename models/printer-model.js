@@ -16,7 +16,7 @@ const printerSchema = new Schema({
     required: [true, 'El numero de serie es necesario'],
   },
   color: {
-    type: boolean,
+    type: Boolean,
     default: false,
   },
   ip: {
